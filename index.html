@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Weather UI</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href=
+"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" />
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: white;
+  overflow: hidden;
+}
+
+/* Style the header */
+
+
+.card {
+    background-color: white;
+    box-shadow:  7px 7px 21px #e3e3e3,
+               -7px -7px 21px #ffffff;
+    border-radius:25px;
+    
+  }
+  .bcard {
+    background-color: white;
+    box-shadow:  7px 7px 21px #e3e3e3,
+               -7px -7px 21px #ffffff;
+    border-radius:25px;
+    border: 2px solid red;
+  }
+.ccard{
+    width: 250px;
+    border-radius: 25px;
+background: #f6f6f6;
+box-shadow:  20px 20px 60px #d1d1d1,
+             -20px -20px 60px #ffffff;
+}
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  margin:10px;
+}
+
+/* Left and right column */
+.column.left {
+  width: 10%;
+  height:95vh;
+}
+.column.left li{
+    list-style-type:none;
+    
+    padding-bottom: 90px;
+}
+.column.left.card .bi-cloud-sun{
+    color: red;
+    font-size: 5rem;
+    
+}
+.column.left.card .bi-house-door,.bi-columns-gap,.bi-gear{
+    color:coral;
+    font-size: 2rem;
+    padding-left: 25px;
+    
+}
+.column.left.card .bi-box-arrow-right{
+    margin-top: 1000px;
+    color:black;
+    font-size: 2rem;
+    padding: 25px;
+}
+
+.column.right {
+  width: 35%;
+  margin: 5px;
+}
+.column.right ul{
+    display: flex;
+    justify-content: space-between;
+}
+.column.right li{
+    list-style-type:none;
+    display: flex;
+    
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* Middle column */
+.column.middle {
+  width: 50%;
+  height:95vh;
+  
+}
+.column.middle .temp{
+    padding-top: 10px;
+    padding-left: 50px;
+    color: cornsilk;
+}
+.column.middle .high{
+    display: flex;
+    justify-content: space-around;
+}
+.column.middle .abc h6{
+    font-size: 30px;
+    color: black;
+}
+.column.middle .abc p{
+    font-size: small;
+    margin-top: -20px;
+    color: black;
+}
+.column.middle .abc h3{
+    font-size: 60px;
+    color: black;
+}
+.abc{
+      background:url(https://cdn.glitch.me/2e39ae89-dcc7-46d5-9fb5-5cda255c611e%2FIndia-day.svg?v=1638729181831);
+      
+      border-radius: 25px;
+      width:100%;
+      height:30%;
+  }
+  
+.week1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.week1 .mon i {
+    font-size: 30px;
+    color: darkgoldenrod;
+    float:left;
+    padding:0 20px;
+    margin:2px;
+    
+}
+.week1 .mon i .bi-cloud-drizzle{
+    font-size: 50px;
+}
+.week1 .mon i .bi-water,.bi-water{
+    font-size: 15px;
+}
+.week1 .mon h5{
+    font-size: 25px;
+    margin-bottom: -10px;
+}
+.week1 .mon p{
+    font-size: 10px;
+}
+.week2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+   /* margin-left: -50px;*/
+    margin-top: 20px;
+    
+}
+.week2 .zero{
+    opacity: 0;
+}
+.week2 .mon i {
+    font-size: 30px;
+    color: darkgoldenrod;
+    float:left;
+    padding:0 20px;
+    margin:2px;
+}  
+.week2 .mon i .bi-water,.bi-droplet{
+    font-size: 15px;
+}
+.week2 .mon h5{
+    font-size: 25px;
+    margin-bottom: -10px;
+}
+.week2 .mon p{
+    font-size: 10px;
+}
+.high{
+    display: flex;
+}
+a {
+	text-decoration: none;
+}
+
+h2 {
+	font-size: 2em;
+	line-height: 1.25em;
+	margin: .5em 0;
+}
+
+h3 {
+	font-size: 1.5em;
+	line-height: 1em;
+	margin: .33em 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.container {
+	width: 50rem;
+}
+
+/* ---------- CALENDAR ---------- */
+
+.calendar {
+	text-align: center;
+}
+
+.calendar header {
+	position: relative;
+}
+
+.calendar h2 {
+	margin-left: -38rem;
+    position: relative;
+}
+
+.calendar thead {
+	font-weight: 50;
+	text-transform: uppercase;
+}
+
+.calendar tbody {
+	color: coral;
+}
+
+.calendar tbody td:hover {
+	border: 2px solid coral;
+}
+
+.calendar td {
+	border: 2px solid transparent;
+	border-radius: 50%;
+	display: inline-block;
+	height: 4em;
+	line-height: 3em;
+	text-align: center;
+	width: 5em;
+}
+
+.calendar .prev-month,
+.calendar .next-month {
+	color: #cbd1d2;
+}
+
+.calendar .prev-month:hover,
+.calendar .next-month:hover {
+	border: 2px solid #cbd1d2;
+}
+
+.current-day {
+	background: coral;
+	color: #f9f9f9;
+}
+
+.event {
+	cursor: pointer;
+	position: relative;
+}
+
+.event:after {
+	background: coral;
+	border-radius: 50%;
+	bottom: .5em;
+	display: block;
+	content: '';
+	height: .5em;
+	left: 50%;
+	margin: -.25em 0 0 -.25em;
+	position: absolute;
+	width: .5em;
+}
+
+.event.current-day:after {
+	background: #f9f9f9;
+}
+
+.btn-prev,
+.btn-next {
+	border: 2px solid #cbd1d2;
+	border-radius: 50%;
+	color: #cbd1d2;
+	height: 2em;
+	font-size: .75em;
+	line-height: 2em;
+	margin: -1em;
+	position: absolute;
+	top: 50%;
+	width: 2em;
+}
+
+/*.btn-prev:hover,
+.btn-next:hover {
+	background: #cbd1d2;
+	color: #f9f9f9;
+}
+
+.btn-prev {
+	left: 6em;
+}
+
+.btn-next {
+	right: 6em;
+}*/
+.column.right .bi-chat-left-dots,.bi-bell{
+    font-size: 25px;
+    color: coral;
+}
+.column.right .bi-person-circle{
+    font-size: 25px;
+}
+.column.right .col-1{
+padding:10px;
+margin-left: 30px;
+}
+.column.right .col-2{
+padding:10px;
+margin-left: 30px;
+}
+.column.right .col-2 img{
+    height:120px;
+    float:left;
+    margin-right: 30px;
+}
+.column.right .col-2 h4{
+    font-size: 25px;
+    color: coral;
+    
+}
+.column.right .col-2 p{
+    color: rgb(228, 194, 57);
+}
+.column.right .col-3{
+padding:10px;
+margin-left: 30px;
+display: flex;
+flex-direction: row;
+
+}
+.column.right .col-3 i {
+    font-size: 25px;
+    color: coral;
+    float:left;
+    
+}
+.column.right .col-3 h4{
+    font-size: 20px;
+    color: coral;
+    
+}
+.column.right .col-4{
+padding:10px;
+margin-left: 30px;
+background-color: burlywood;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column.side, .column.middle {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+
+
+
+
+<div class="row">
+  <div class="column left card">
+    <ul>
+            
+                          <li><i class="bi-cloud-sun"></i></li>
+                          
+                          <li><i class="bi-house-door"></i></li>
+                          <li><i class="bi-columns-gap"></i></li>
+                          <li><i class="bi-gear"></i></li>
+                          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                          <li><i class="bi-box-arrow-right"></i></li>
+                      </ul>
+  </div>
+  
+  <div class="column middle card">
+    <h2>Weather Forecast</h2>
+    <p>Sunday 26, December 2021</p>
+    <div class="abc">
+        <div class="temp">
+        <h6>MECCA</h6>
+        <p>Saudi Arabia</p>
+      <h3>32 degree</h3>
+        </div>
+  </div>
+    <h3>Week</h3>
+    <div class="week1">
+        <div class="bcard mon"><i class="bi-cloud-drizzle"></i>
+        <h5>Monday</h5>
+        <p>Cloudy Drizzle</p>
+        <i class="bi-water">10.3 km/h</i><br>
+        <i class="bi-droplet">60%</i>
+        </div>
+        <div class="bcard mon"><i class="bi-cloud-drizzle"></i>
+            <h5>Tuesday</h5>
+            <p>Cloudy Drizzle</p>
+            <i class="bi-water">10.3 km/h</i><br>
+            <i class="bi-droplet">60%</i></div>
+        <div class="bcard mon"><i class="bi-cloud-fog"></i>
+            <h5>Wednesday</h5>
+            <p>Cloudy Drizzle</p>
+            <i class="bi-water">10.3 km/h</i><br>
+            <i class="bi-droplet">60%</i></div>
+        <div class="bcard mon"><i class="bi-cloud-fog"></i>
+            <h5>Thursday</h5>
+            <p>Cloudy Drizzle</p>
+            <i class="bi-water">10.3 km/h</i><br>
+            <i class="bi-droplet">60%</i></div>
+        
+    </div>
+    <div class="week2">
+        <div class="bcard mon"><i class="bi-cloud-lightning-rain"></i>
+            <h5>Friday</h5>
+            <p>Cloudy Drizzle</p>
+            <i class="bi-water">10.3 km/h</i><br>
+            <i class="bi-droplet">60%</i></div>
+        <div class="bcard mon"><i class="bi-cloud-lightning-rain"></i>
+            <h5>Saturday</h5>
+            <p>Cloudy Drizzle</p>
+            <i class="bi-water">10.3 km/h</i><br>
+            <i class="bi-droplet">60%</i></div>
+        <div class="bcard mon"><i class="bi-cloud-lightning-rain"></i>
+            <h5>Sunday</h5>
+            <p>Cloudy Drizzle</p>
+            <i class="bi-water">10.3 km/h</i><br>
+            <i class="bi-droplet">60%</i></div>
+            <div class="bcard zero mon"><i class="bi-cloud-lightning-rain"></i>
+                <h5>Sunday</h5>
+                <p>Cloudy Drizzle</p>
+                <i class="bi-water">10.3 km/h</i><br>
+                <i class="bi-droplet">60%</i></div>
+    </div>
+    <h3>Today's Highlights</h3>
+    <div class="high">
+        <div class="ccard fri"><h5>Sunrise & Sunset</h5><br><br></div>
+        <div class="ccard sat"><h5>Temp. Graph</h5><br><br></div>
+        <div class="ccard sun"><h5>Air Quality Index</h5><br><br></div>
+    </div>
+  </div>
+  
+  <div class="column right">
+      <div class="head">
+          <ul><li><i class="bi-chat-left-dots"></i>
+            <i class="bi-bell"></i></li>
+            <li><i class="bi-person-circle"></i>
+            </li>
+        </ul>
+      </div>
+  <div class="col-1 card">
+    <div class="container">
+
+        <div class="calendar">
+      
+          <header>
+      
+            <h2>September</h2>
+      
+          <!--  <a class="btn-prev fontawesome-angle-left" href="#"></a>
+            <a class="btn-next fontawesome-angle-right" href="#"></a> -->
+      
+          </header>
+      
+          <table>
+      
+            <thead>
+      
+              <tr>
+      
+                <td>Mo</td>
+                <td>Tu</td>
+                <td>We</td>
+                <td>Th</td>
+                <td>Fr</td>
+                <td>Sa</td>
+                <td>Su</td>
+      
+              </tr>
+      
+            </thead>
+      
+            <tbody>
+      
+              <tr>
+                <td class="prev-month">26</td>
+                <td class="prev-month">27</td>
+                <td class="prev-month">28</td>
+                <td class="prev-month">29</td>
+                <td class="prev-month">30</td>
+                <td class="prev-month">31</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td class="event">10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>17</td>
+                <td>18</td>
+                <td>19</td>
+                <td>20</td>
+                <td class="event">21</td>
+                <td>22</td>
+              </tr>
+      
+              <tr>
+                <td class="current-day event">23</td>
+                <td>24</td>
+                <td>25</td>
+                <td>26</td>
+                <td>27</td>
+                <td>28</td>
+                <td>29</td>
+              </tr>
+              <tr>
+                <td>30</td>
+                <td class="next-month">1</td>
+                <td class="next-month">2</td>
+                <td class="next-month">3</td>
+                <td class="next-month">4</td>
+                <td class="next-month">5</td>
+                <td class="next-month">6</td>
+              </tr>
+      
+            </tbody>
+      
+          </table>
+      
+        </div> <!-- end calendar -->
+      
+      </div>
+  </div>
+    <div class="col-2 card">
+    <img src="./12355.jpg" alt="phone image">
+    <h4>Get our Weather app on your devices!</h4>
+    <p>Get the weather app on your mobile</p>
+    </div>
+    <div class="col-3 card">
+        <i class="bi-send-fill"></i><h4>Subscribe to our newsletter</h4>
+        
+        </div>
+        <div class="col-4 card">
+           <h3>Add City</h3>
+            </div>
+    </div>
+    
+   
+    
+    </div>
+  </div>
+</div>
+  
+</body>
+</html>
